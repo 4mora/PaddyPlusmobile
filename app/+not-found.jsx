@@ -5,16 +5,17 @@ import UserDashboard from '../components/Dashbord/Userdashbord';
 import FarmerRegistration from '../components/Farmer/FarmerRegistration';
 import FarmerList from '../components/Farmer/FarmerList';
 import FarmerPaddyDetails from '../components/Farmer/FarmerPaddyDetails'
+import FarmerPadyPayment from '../components/Farmer/FarmerPadyPaymant'
 export default function NotFoundScreen() {
   return (
     <>
       {/* <Stack.Screen  />
       <SignIn />
-      {/* <FarmerPaddyDetails /> */}
       {/* <FarmerRegistration />  */}
       {/* <FarmerList />  */}
-      <UserDashboard />
-
+      {/* <FarmerPadyPayment /> */}
+      <FarmerPaddyDetails/>
+      {/* <UserDashboard /> */}
 
      </>
   );

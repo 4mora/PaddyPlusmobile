@@ -11,7 +11,6 @@ import {
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { FontAwesome } from '@expo/vector-icons';
-import FarmerPadyPaymantPopup from './FarmerPadyPaymantPopup'; 
 
 const FarmerPaddyDetails = ({ route }) => {
   // const { farmer } = route.params;
@@ -27,6 +26,7 @@ const FarmerPaddyDetails = ({ route }) => {
   const [bags, setBags] = useState([]);
   const [newBagWeight, setNewBagWeight] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+  const [total, setTotal] = useState(0);
 
   var perkilo;
   const paddyTypes = [
@@ -59,13 +59,28 @@ const FarmerPaddyDetails = ({ route }) => {
     setBags([...bags, newBag]);
     setNewBagWeight('');
   };
+  const Submit = () => {
+    // if (!newBagWeight || isNaN(newBagWeight)) {
+    //   Alert.alert('Invalid Input', 'Please enter a valid weight');
+    //   return;
+    // }
+    const weight = parseFloat(newBagWeight);
+    const newBag = {
+      id: `bag_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      weight
+    };
+
+    setBags([...bags, newBag]);
+    setNewBagWeight('');
+  };
 
   const deleteBag = (bagId) => {
     setBags(bags.filter(bag => bag.id !== bagId));
   };
 
   const getTotalWeight = () => {
-    return bags.reduce((total, bag) => total + bag.weight, 0);
+    var TotalWeight = bags.reduce((total, bag) => total + bag.weight, 0);
+    return TotalWeight;
   };
 
 
@@ -100,7 +115,9 @@ const FarmerPaddyDetails = ({ route }) => {
       {/* Total Weight */}
       <View style={styles.totalSection}>
         <Text style={styles.totalLabel}>Total Weight:</Text>
-        <Text style={styles.totalWeight}>{getTotalWeight()} kg</Text>
+        <TouchableOpacity onPress={() => setTotal(getTotalWeight())}>
+          <Text style={styles.totalWeight}>{total} kg</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Paddy Type Selection */}
@@ -160,15 +177,15 @@ const FarmerPaddyDetails = ({ route }) => {
       </View>
       <View style={styles.section}>
 
-        {/* <TouchableOpacity style={styles.addButton} onPress={addBag}>
+        <TouchableOpacity style={styles.addButton} onPress={Submit}>
           <Text style={styles.addButtonText}>Submit</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
 
-        <FarmerPadyPaymantPopup
+        {/* <FarmerPadyPaymantPopup
         visible={showPopup}
         onClose={() => setShowPopup(false)}
         totalWeight={100} // you can pass this dynamically
-      />
+      /> */}
       </View>
 
 

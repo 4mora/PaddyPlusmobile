@@ -14,8 +14,8 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const FarmerList = () => {
-  const navigation = useNavigation(); // Assign navigation here
-
+  // const navigation = useNavigation(); // Assign navigation here
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
 
   const [farmers] = useState([
@@ -26,15 +26,18 @@ const FarmerList = () => {
     { id: '5', name: 'Saman Kumara', nic: '852741963V', phone: '0704567891', address: 'Anuradhapura' },
   ]);
 
-  const filteredFarmers = farmers.filter(farmer => 
+  const filteredFarmers = farmers.filter(farmer =>
     farmer.nic.toLowerCase().includes(searchQuery.toLowerCase()) ||
     farmer.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const renderFarmerCard = ({ item }) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={styles.card}
-      onPress={() => navigation.navigate("FarmerPaddyDetails", { farmer: item })} // Corrected navigation
+      onPress={() => {
+        // Do nothing or show farmer details in a modal/expanded view
+        console.log('Farmer selected:', item);
+      }}
     >
       <View style={styles.cardHeader}>
         <Text style={styles.farmerName}>{item.name}</Text>
@@ -76,6 +79,14 @@ const FarmerList = () => {
           </View>
         }
       />
+      <TouchableOpacity style={styles.leftCenterButton}   
+      onPress={() => router.push('/DashboardScreen')}
+
+      >
+        <FontAwesome5 name="plus" size={16} color="#fff" />
+        <Text style={styles.leftCenterButtonText}>Add Farmer</Text>
+      </TouchableOpacity>
+
     </SafeAreaView>
   );
 };
@@ -171,6 +182,26 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#666',
   },
+  leftCenterButton: {
+    position: 'absolute',
+    right: 2,
+    top: '50%',
+    transform: [{ translateY: -25 }],
+    backgroundColor: '#4CAF50',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 7,
+    paddingHorizontal: 3,
+    borderRadius: 8,
+    elevation: 3,
+  },
+  leftCenterButtonText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginLeft: 8,
+  },
+
 });
 
 export default FarmerList; 
