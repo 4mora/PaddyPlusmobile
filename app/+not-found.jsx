@@ -14,7 +14,7 @@ export default function NotFoundScreen() {
       {/* <FarmerRegistration />  */}
       {/* <FarmerList />  */}
       {/* <FarmerPadyPayment /> */}
-      <FarmerPaddyDetails/>
+      {/* <FarmerPaddyDetails/> */}
       {/* <UserDashboard /> */}
 
      </>

@@ -18,7 +18,7 @@ export default function Dashboard() {
           style={styles.card}
           onPress={() => router.push('/(tabs)/dashboard')}
         >
-          <Text style={styles.cardText}>Expense</Text>
+          <Text style={styles.cardText}>Dashboard</Text>
         </TouchableOpacity>
         </View>
         <View style={styles.grid}>

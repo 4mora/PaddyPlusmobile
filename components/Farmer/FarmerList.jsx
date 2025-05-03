@@ -79,9 +79,8 @@ const FarmerList = () => {
           </View>
         }
       />
-      <TouchableOpacity style={styles.leftCenterButton}   
-      onPress={() => router.push('/DashboardScreen')}
-
+      <TouchableOpacity style={styles.leftCenterButton}
+        onPress={() => router.navigate('/(tabs)/FarmerRegistration')}
       >
         <FontAwesome5 name="plus" size={16} color="#fff" />
         <Text style={styles.leftCenterButtonText}>Add Farmer</Text>
